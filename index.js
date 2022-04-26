@@ -3,6 +3,8 @@
  * @param {Array<{topic:string, message:string}>} letters 
  */
  function getUsefulInfo(letters) {
+   if(!Array.isArray(letters))
+    return null
   return letters.map(letter => getUsefulInfoFromOneLetter(letter));
 }
 

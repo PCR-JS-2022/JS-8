@@ -82,4 +82,9 @@ describe('getUsefulInfo', () => {
     );
     assert.deepEqual(letters[3].usefulInfo, newLetter[3].usefulInfo);
   });
+
+  it('Корректно обрабатывет letters', () => {
+    const newLetter = getUsefulInfo(null);
+    assert.deepEqual(null, newLetter);
+  });
 });
