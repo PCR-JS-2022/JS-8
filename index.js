@@ -25,8 +25,9 @@ function getUsefulInfoFromOneLetter(letter)
     {
       if(titlePattern.test(letter.topic))
       {
-        const searchResult = letter.message.match(messagePattern).map(res => transformFunc(res))
-        result.push(...searchResult)
+        const searchResult = letter.message.match(messagePattern)?.map(res => transformFunc(res))
+        if(searchResult)
+          result.push(...searchResult)
       }
     }
     if(result.length === 0)
