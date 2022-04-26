@@ -5,14 +5,14 @@
 Ваша задача написать функцию `getUsefulInfo`, которая принимает список писем в формате:
 
 ```js
-const letter = [
+const letters = [
   {
     topic: '...',
-    letter: '...',
+    message: '...',
   },
   {
     topic: '...',
-    letter: '...',
+    message: '...',
   },
 ];
 ```
