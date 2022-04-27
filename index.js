@@ -14,20 +14,22 @@ function getUsefulInfo(letters) {
 
 		if (lowerTopic.includes('компания')) {
 			const companyRegExp = /([А-Я]{2,3}) "(\\.|[^"\\])*"/m
-			return {...letter, usefulInfo: letter.message.match(companyRegExp)[0]}
+			const match = letter.message.match(companyRegExp)
+			return {...letter, usefulInfo: match ? match[0] : null}
 		}
 
 		if (lowerTopic.includes('автомобиль')) {
 			const numberRegExp = /([А-Я]\d{3}[А-Я]{2}) (\d{2,3}\b)/m
-			return {...letter, usefulInfo: letter.message.match(numberRegExp)[0]}
+			const match = letter.message.match(numberRegExp)
+			return {...letter, usefulInfo: match ? match[0] : null}
 		}
 
 		if (lowerTopic.includes('оплата')) {
 			const sumRegExp = /((\d{1,3},)*(\d{1,3})*(\.)*(\d{2})*)\b/m
-			const match = letter.message.match(sumRegExp)[0]
-			const replaced = match.replace(/,/g, '')
+			const match = letter.message.match(sumRegExp)
+			const replaced = match[0]?.replace(/,/g, '')
 			const sum = +replaced
-			return {...letter, usefulInfo: sum}
+			return {...letter, usefulInfo: match ? sum : null}
 		}
 
 		return letter
