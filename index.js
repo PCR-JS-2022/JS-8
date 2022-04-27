@@ -16,10 +16,10 @@ function getUsefulInfoFromOneLetter(letter)
 {
   let result = []
   const triggerWordPatterns =  [
-    [/встреча/i, /(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\d\d ([0-1]\d|2[0-3])(:[0-5]\d)/g, res => res],
-    [/компания/i, /(АО|ОАО|ООО|ИП|ПАО|НКО|ОП) ".*"/g, res => res],
-    [/автомобиль/i,/[АВЕКМНОРСТУХ]\d{3}(?<!000)[АВЕКМНОРСТУХ]{2} \d{2,3}/g, res => res],
-    [/оплата/i, /(\d{1,3},?)+(\.\d{1,2})? р\./g, res => Number(res.split(' ')[0].replaceAll(',',''))],
+    [/встреч(а|и)/i, /(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).\d+ ([0-1]\d|2[0-3])(:[0-5]\d)/g, res => res],
+    [/компани(я|и)/i, /(АО|ОАО|ООО|ИП|ПАО|НКО|ОП) ".*"/g, res => res],
+    [/автомобил(ь|и)/i,/[АВЕКМНОРСТУХ]\d{3}(?<!000)[АВЕКМНОРСТУХ]{2} \d{2,3}/g, res => res],
+    [/оплат(а|ы)/i, /(\d{1,3},?)+(\.\d{1,2})? р\./g, res => Number(res.split(' ')[0].replaceAll(',',''))],
   ]
     for(let [titlePattern, messagePattern, transformFunc] of triggerWordPatterns)
     {
