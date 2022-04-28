@@ -13,7 +13,7 @@ function getUsefulInfo(letters) {
 		}
 
 		if (lowerTopic.includes('компания')) {
-			const companyRegExp = /([А-Я]{2,3}) "(\\.|[^"\\])*"/m
+			const companyRegExp = /([А-Я]{2,3}) "(\\.|[^"\\])+"/m
 			const match = letter.message.match(companyRegExp)
 			return {...letter, usefulInfo: match ? match[0] : null}
 		}
@@ -25,11 +25,17 @@ function getUsefulInfo(letters) {
 		}
 
 		if (lowerTopic.includes('оплата')) {
-			const sumRegExp = /((\d{1,3},)*(\d{1,3})*(\.)*(\d{2})*)\b/m
+			const sumRegExp = /((\d{1,3},)*(\d{1,3})*(\.)*(\d{2})*)( р\.)/m
 			const match = letter.message.match(sumRegExp)
-			const replaced = match[0]?.replace(/,/g, '')
+			if (!match)
+				return {...letter, usefulInfo: null}
+
+			const num = match[0].replace(/( р\.)/g, '')
+			const replaced = num[0].replace(/,/g, '')
 			const sum = +replaced
-			return {...letter, usefulInfo: match ? sum : null}
+
+
+			return {...letter, usefulInfo: sum}
 		}
 
 		return letter
