@@ -9,6 +9,8 @@ function getUsefulInfo(letters) {
     const regMeet = /встреч(а|и|у)/i;
     const regCompany = /компани(и|я)/i;
     const regAuto = /автомобил(ь|и)/i;
+    const regPay = /оплат(а|ы)/i;
+
     let copy = {};
     for (let key in letter) {
       copy[key] = letter[key];
@@ -35,6 +37,24 @@ function getUsefulInfo(letters) {
       const regNum = /[АВЕКМНОРСТУХA-Z]{1}\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2} \d{2,3}\b/i;
       if(regNum.exec(letter.message) !== null) {
         copy.usefulInfo = regNum.exec(letter.message)[0];
+      } else {
+        copy.usefulInfo = null;
+      }
+      result.push(copy);
+    }
+
+    if(regPay.test(letter.topic)) {
+      const regPrice = /[1-9]\d{0,}(((,\d{3})+)|(\d+))(([.]\d{2} p[.])|( р[.]))/;
+      if(regPrice.exec(letter.message) !== null) {
+        let price = regPrice.exec(letter.message)[0];
+        price = price.substring(0, price.length - 3);
+        let result = '';
+        for(let i = 0; i < price.length; i++) {
+          if(price[i] !== ',') {
+            result += price[i];
+          }
+        } 
+        copy.usefulInfo = Number(result);
       } else {
         copy.usefulInfo = null;
       }
