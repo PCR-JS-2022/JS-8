@@ -18,7 +18,7 @@ function getUsefulInfo(letters) {
     } 
 
     if(regCompany.test(letter.topic)) {
-      const regCompany = /(ИП|ООО|ОАО|АО|ЗАО) (["'].*?["'])/;
+      const regCompany = /(ИП|ООО|ОАО|АО|ЗАО) (["'](?!ИП|ООО|ОАО|АО|ЗАО).+?["'])/;
       if(regCompany.exec(letter.message) !== null) {
         copy.userfulInfo = regCompany.exec(letter.message)[0];
       } else {
