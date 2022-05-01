@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Функция находит и добавляет полезную информацию в письма
  * @param {Array<{topic:string, message:string}>} letters 
@@ -8,21 +9,24 @@ function getUsefulInfo(letters) {
     const regMeet = /встреч(а|и|у)/i;
     const regCompany = /компани(и|я)/i;
     const regAuto = /автомобил(ь|и)/i;
-    const copy = letter;
+    let copy = {};
+    for (let key in letter) {
+      copy[key] = letter[key];
+    }
 
     if(regMeet.test(letter.topic)) {
       const regDate = /(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](\d{4}) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])/g;
       const copy = letter;
-      copy.userfulInfo = letter.message.match(regDate);
+      copy.usefulInfo = letter.message.match(regDate);
       result.push(copy);
     } 
 
     if(regCompany.test(letter.topic)) {
       const regCompany = /(ИП|ООО|ОАО|АО|ЗАО) (["'][a-zа-яё"' ]+["'])/i;
       if(regCompany.exec(letter.message) !== null) {
-        copy.userfulInfo = regCompany.exec(letter.message)[0];
+        copy.usefulInfo = regCompany.exec(letter.message)[0];
       } else {
-        copy.userfulInfo = null;
+        copy.usefulInfo = null;
       }
       result.push(copy);
     }
@@ -30,9 +34,9 @@ function getUsefulInfo(letters) {
     if(regAuto.test(letter.topic)) {
       const regNum = /[АВЕКМНОРСТУХA-Z]{1}\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2} \d{2,3}\b/i;
       if(regNum.exec(letter.message) !== null) {
-        copy.userfulInfo = regNum.exec(letter.message)[0];
+        copy.usefulInfo = regNum.exec(letter.message)[0];
       } else {
-        copy.userfulInfo = null;
+        copy.usefulInfo = null;
       }
       result.push(copy);
     }
