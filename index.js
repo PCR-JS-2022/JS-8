@@ -9,12 +9,15 @@ function getUsefulInfo(letters) {
     if (letter.topic.match(/встреча/iu)) {
       const matches = letter.message.matchAll(/(?:^|[\s"(`{\['])((?:0[1-9]|[12]\d|31)\.(?:0[1-9]|1[12])\.\d{4} (?:[01]\d|2[1-3]):[0-5]\d)(?:$|[\s!`";:)}\]'.,])/g);
       if (matches) {
-        usefulInfo = Array.from(matches).map(match => match[1]);
+        const matchesArr = Array.from(matches);
+        if (matchesArr.length) {
+          usefulInfo = matchesArr.map(match => match[1]);
+        }
       }
     }
 
     if (letter.topic.match(/компания/iu)) {
-      const matches = letter.message.match(/(?:^|[\s(`{\['])((?:ИП|ООО|ОАО|АО|ЗАО) "[^"]+")(?:$|[\s!`;:)}\]'.,])/u);
+      const matches = letter.message.match(/(?:^|[\s(`{\['])((?:ИП|ООО|ОАО|АО|ЗАО) "[А-Яа-я" ]+")(?:$|[\s!`;:)}\]'.,])/u);
       if (matches) {
         usefulInfo = matches[1];
       }
@@ -28,7 +31,7 @@ function getUsefulInfo(letters) {
     }
 
     if (letter.topic.match(/оплата/iu)) {
-      const matches = letter.message.match(/(?:^|[\s"(`{\['])((?:[1-9]\d{0,2}(?:,\d{3})*|0|[1-9]\d*)(?:\.\d{2})?) р\.(?:$|[\s!`";:)}\]',])/u);
+      const matches = letter.message.match(/(?:^|[\s"(`{\[']|\D\.)((?:[1-9]\d{0,2}(?:,\d{3})*|0|[1-9]\d*)(?:\.\d{2})?) р\.(?:$|[\s!`";:)}\]',])/u);
       if (matches) {
         usefulInfo = Number(matches[1].replaceAll(',', ''));
       }
