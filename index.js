@@ -28,7 +28,7 @@ function getUsefulInfo(letters) {
     }
 
     if(regAuto.test(letter.topic)) {
-      const regNum = /[a-zа-яё]{1}\d{3}[a-zа-яё]{2} \d{2,3}\b/i;
+      const regNum = /[АВЕКМНОРСТУХA-Z]{1}\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2} \d{2,3}\b/i;
       if(regNum.exec(letter.message) !== null) {
         copy.userfulInfo = regNum.exec(letter.message)[0];
       } else {
