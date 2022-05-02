@@ -13,7 +13,7 @@ function getUsefulInfo(letters) {
 		}
 
 		if (lowerTopic.includes('компания')) {
-			const companyRegExp = /(ИП|ООО|ОАО|АО|ЗАО) "(\\.|[^"\\])*"/m
+			const companyRegExp = /(ИП|ООО|ОАО|АО|ЗАО) ".+"/m
 			const match = letter.message.match(companyRegExp)
 			return {...letter, usefulInfo: match ? match[0] : null}
 		}
