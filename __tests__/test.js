@@ -127,4 +127,14 @@ describe('getUsefulInfo', () => {
     );
     assert.deepEqual(letters[5].usefulInfo, newLetter[5].usefulInfo);
   });
+
+  it('Корректно обрабатывает несколько писем', () => {
+    const newLetter = getUsefulInfo(
+      letters.map((l) => ({
+        topic: l.topic,
+        message: l.message,
+      })),
+    );
+    assert.deepEqual(newLetter, letters);
+  });
 });
