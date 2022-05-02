@@ -19,7 +19,7 @@ function getUsefulInfo(letters) {
 		}
 
 		if (lowerTopic.includes('автомобиль')) {
-			const numberRegExp = /([А-ЯA-Z]\d{3}[А-ЯA-Z]{2}) (\d{2,3})\b/m
+			const numberRegExp = /([АВЕКМНОРСТУХABEKMHOPCTYX]\d{3}[АВЕКМНОРСТУХABEKMHOPCTYX]{2}) (\d{2,3})\b/m
 			const match = letter.message.match(numberRegExp)
 			return {...letter, usefulInfo: match ? match[0] : null}
 		}
