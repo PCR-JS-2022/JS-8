@@ -13,7 +13,7 @@ function getUsefulInfo(letters) {
         }
 
         if (letter.topic.match(/компания/i)) {
-            let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) ".+")/m) 
+            let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) ".+")/i) 
             if (res) {
                 usefulInfo = res[1]
             }
@@ -27,7 +27,7 @@ function getUsefulInfo(letters) {
         }
         
         if (letter.topic.match(/оплата/i)) {
-            let res = letter.message.match(/(([1-9]\d{0,2}(,\d{3})*|0|[1-9]\d*)(\.\d{2})?) р\./)
+            let res = letter.message.match(/(([1-9]\d{0,2}(,\d{3})*|0|[1-9]\d*)(\.\d{2})?) р./)
             if (res) {
                 usefulInfo = Number(res[1].replaceAll(',', ''))
             }
