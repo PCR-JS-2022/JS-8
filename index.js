@@ -24,9 +24,9 @@ function getUsefulInfo(letters) {
         }
 
         if (letter.topic.match(/автомобиль/iu)) {
-            let res = letter.message.match(/(([А-ЯA-ZЁ]\d{3}(?<!000)[А-ЯA-ZЁ]{2}) (\d{2,3}))\b/mui)
+            let res = letter.message.match(/([А-ЯA-ZЁ]\d{3}(?<!000)[А-ЯA-ZЁ]{2} (\d{2,3}))\b/mui)
             if (res) {
-                usefulInfo = 1
+                usefulInfo = res[1]
             }
         }
         
