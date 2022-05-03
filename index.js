@@ -54,10 +54,10 @@ function getUsefulInfo(letters) {
       letter.usefulInfo = findPrice(letter.message)
       console.log(letter.usefulInfo)
     }
-
+    /*
     if (!letter.usefulInfo) {
       letter.usefulInfo = null
-    }
+    }*/
   });
   return letters
 }
