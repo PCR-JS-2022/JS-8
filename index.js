@@ -11,7 +11,7 @@ function getUsefulInfo(letters) {
             if (res) {
                 res = Array.from(res)
                 if (res.length) {
-                    usefulInfo = res.map((r) => 1)
+                    usefulInfo = res.map((r) => r)
                 }
             }
         }
@@ -19,7 +19,7 @@ function getUsefulInfo(letters) {
         if (letter.topic.match(/компания/iu)) {
             let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) ".+")/mui)
             if (res) {
-                usefulInfo = res[1]
+                usefulInfo = 1
             }
         }
 
