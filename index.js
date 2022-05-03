@@ -6,7 +6,7 @@ function checkInfo(result) {
 }
 
 function findMeetingDate(message) {
-   let date = message.match(
+  let date = message.match(
     /(0[1-9]|[1-2][0-9]|3[0-1]).(0[1-9]|1[0-2]).([0-9][0-9][0-9][0-9]) ([0-1][0-9]|2[0-3]):([0-5][0-9])/g
   )
   return date
@@ -30,7 +30,12 @@ function findPrice(message) {
   let sum = message.match(
     /(([0-9]{1,3},)*([0-9]{1,3})+.*([0-9][0-9])*) р./g
   )
-  return checkInfo(sum)
+  if (sum) {
+    sum = Number(sum[0].replace(/ р./g, '').replace(/,/g, ''))
+  } else {
+    sum = null
+  }
+  return sum
 }
 
 /**
@@ -39,7 +44,7 @@ function findPrice(message) {
  */
 function getUsefulInfo(letters) {
   if (!Array.isArray(letters)) {
-    throw new Error ('Ошибка ввода getUsefulInfo()')
+    throw new Error('Ошибка ввода getUsefulInfo()')
   }
 
   letters.forEach(letter => {
@@ -61,7 +66,7 @@ function getUsefulInfo(letters) {
     }
 
     if (letter.topic.toLowerCase().indexOf("оплата") != -1) {
-      letter.usefulInfo = findPrice(letter.message).replace(/ р./g, '').replace(/,/g, '')
+      letter.usefulInfo = findPrice(letter.message)
     }
   });
   return letters
