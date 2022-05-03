@@ -12,7 +12,7 @@ function getUsefulInfo(letters) {
         }
 
         if (lower.includes('компания')) {
-            const re = /(ИП|ООО|ОАО|АО|ЗАО) "(.*?)"/m;
+            const re = /(ИП|ООО|ОАО|АО|ЗАО) "(.+)"/m;
             return { ...letter, usefulInfo: letter.message.match(re) ? letter.message.match(re)[0] : null };
         }
 
