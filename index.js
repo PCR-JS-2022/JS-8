@@ -28,7 +28,7 @@ function findCarPlate(message) {
 
 function findPrice(message) {
   let sum = message.match(
-    /(([0-9]{1,3},)*([0-9]{1,3})+.*([0-9][0-9])*) р./g
+    /(([0-9]{1,3},)*([0-9]{1,3})+\.*([0-9][0-9])*) р\./g
   )
   if (sum) {
     sum = Number(sum[0].replace(/ р./g, '').replace(/,/g, ''))
