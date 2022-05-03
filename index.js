@@ -7,8 +7,7 @@ function getUsefulInfo(letters) {
         const lower = letter.topic.toLowerCase()
 
         if (lower.includes('встреча')) {
-            const re = /(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\d (0[0-9]|[1][0-9]|2[0-3])[:]([0-5][0-9])/gm;
-            console.log(letter.message.match(re))
+            const re = /(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.]\d{4} ([01][0-9]|2[0-3])[:]([0-5][0-9])/gm;
             return { ...letter, usefulInfo: letter.message.match(re) };
         }
 
@@ -18,7 +17,7 @@ function getUsefulInfo(letters) {
         }
 
         if (lower.includes('автомобиль')) {
-            const re = /([АВЕКМНОРСТУХ]{1}[0-9]{3}[АВЕКМНОРСТУХ]{2} [0-9]{2,3})/m;
+            const re = /([АВЕКМНОРСТУХA-Z]{1}[0-9]{3}[АВЕКМНОРСТУХA-Z]{2} [0-9]{2,3})/m;
             return { ...letter, usefulInfo: letter.message.match(re) ? letter.message.match(re)[0] : null };
         }
 
@@ -33,6 +32,8 @@ function getUsefulInfo(letters) {
         else {
             return { ...letter, usefulInfo: null };
         }
+
+        return letter;
     })
 }
 
