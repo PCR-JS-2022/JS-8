@@ -25,7 +25,7 @@ function addPayInfo(message) {
 }
 
 function getUsefulInfo(letters) {
-  if (!Array.isArray(letters)){
+  if (!Array.isArray(letters)|| !letters){
     throw new Error('Ошибка ввода');
   }
   letters.forEach( letter => {
@@ -43,6 +43,7 @@ function getUsefulInfo(letters) {
       letter.usefulInfo = addPayInfo(letter.message);
     }
   })
+  return letters;
 }
 
 module.exports = {
