@@ -6,7 +6,7 @@ const PAYMENT = 'оплата';
 const keywords = [MEETING, COMPANY, CAR, PAYMENT];
 const keywordsRegex = {
   [MEETING]: /[0-3][1-9].[0-1][1-9].[0-9]{4}\s[0-2][0-9]:[0-5][0-9]/g,
-  [COMPANY]: /(ИП|ООО|ООО|ОАО|АО|ЗАО)\s"[ЁёА-я\s]+"/,
+  [COMPANY]: /(ИП|ООО|ООО|ОАО|АО|ЗАО)\s"[ЁёА-я\s]+"/g,
   [CAR]: /[\s.,][a-zA-ZЁёА-я][0-9]{3}[a-zA-ZЁёА-я]{2}\s[0-9]{2,3}[\s,.]/,
   [PAYMENT]: /[0-9]{1,3}(?:,?[0-9]{3})*(?:\.?[0-9]{2})/
 }
@@ -30,7 +30,7 @@ function getUsefulInfo(letters) {
         usefulInfo = getMeetingDates(letter.message);
         break;
       case COMPANY:
-        usefulInfo = getFirstMatchedSubstring(letter.message, keywordsRegex[COMPANY]);
+        usefulInfo = getAllMatchedSubstrings(letter.message, keywordsRegex[COMPANY]);
         break;
       case CAR:
         usefulInfo = getCarNumber(letter.message);
@@ -100,8 +100,22 @@ function getFirstMatchedSubstring(text, regex) {
   if (!match) {
     return null;
   }
-  
+
   return match[0] || null;
+}
+
+/**
+ * @param {string} text
+ * @param {RegExp} regex
+ * @return {Array<string> | null}
+ */
+ function getAllMatchedSubstrings(text, regex) {
+  const match = text.match(regex);
+  if (!match || match.length === 0) {
+    return null;
+  }
+  
+  return match;
 }
 
 /**
