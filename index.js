@@ -15,8 +15,8 @@ function getUsefulInfo(letters) {
         ? letter.message.match(/([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2})\s\d{2,3}\b/mui)[0]
         : null;
     } else if (/оплата/gi.exec(letter.topic)) {
-      letter.usefulInfo = letter.message.match(/([\d\.,\s-]+[\d\.]+) р/mi)
-        ? parseFloat(letter.message.match(/([\d\.,\s-]+[\d\.]+) р/mi)[0].trim().replace(/,/g, ''))
+      letter.usefulInfo = letter.message.match(/(([1-9]\d{0,2}(,\d{3})*|0|[1-9]\d*)([.]\d{2})?) р\./mi)
+        ? parseFloat(letter.message.match(/(([1-9]\d{0,2}(,\d{3})*|0|[1-9]\d*)([.]\d{2})?) р\./mi)[0].trim().replace(/,/g, ''))
         : null;
     } else {
       letter.usefulInfo = null;
