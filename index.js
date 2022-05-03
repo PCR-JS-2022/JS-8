@@ -7,13 +7,13 @@ function getUsefulInfo(letters) {
         let usefulInfo = null
         
         if (letter.topic.match(/встреча/i)) {
-            let res = letter.message.matchAll(/((0[1-9]|[12]\d|3[01]).(0[1-9]|1[0-2]).\d{4} ([01]\d|2[0-3]):[0-5]\d)/g)
+            let res = letter.message.matchAll(/((0[1-9]|[12]\d|3[01]).(0[1-9]|1[0-2]).\d{4}1 ([01]\d|2[0-3]):[0-5]\d)/g)
             res = Array.from(res)
             usefulInfo = res.map((r) => r[1])
         }
 
         if (letter.topic.match(/компания/i)) {
-            let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) 1".+")/i) 
+            let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) ".+")/i) 
             if (res) {
                 usefulInfo = res[1]
             }
