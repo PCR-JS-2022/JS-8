@@ -7,11 +7,17 @@ function getUsefulInfo(letters) {
     if (/встреча/gi.exec(letter.topic)) {
       letter.usefulInfo = letter.message.match(/(?<!\d)((0[1-9]|[12][0-9]|3[01])[.](0[0-9]|1[012])[.](([1-9])([0-9]{3}))\s(([01][0-9]|2[0-3]):[0-5][0-9]$))/gmi);
     } else if (/компания/gi.exec(letter.topic)) {
-      letter.usefulInfo = letter.message.match(/(?<![А-ЯЁа-яёA-Za-z0-9])(ИП|ООО|ОАО|АО|ЗАО)\s\".+?"/gmi) ? letter.message.match(/(?<![А-ЯЁа-яёA-Za-z0-9])(ИП|ООО|ОАО|АО|ЗАО)\s\".+?"/gmi)[0].toString() : null;
+      letter.usefulInfo = letter.message.match(/(ИП|ООО|ОАО|АО|ЗАО)\s\".+?"/gmi)
+        ? letter.message.match(/(ИП|ООО|ОАО|АО|ЗАО)\s\".+?"/gmi)[0].toString()
+        : null;
     } else if (/автомобиль/gi.exec(letter.topic)) {
-      letter.usefulInfo = letter.message.match(/(?<![А-ЯЁа-яёA-Za-z0-9])([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}))(?![А-ЯЁа-яёA-Za-z0-9])/gmi) ? letter.message.match(/(?<![А-ЯЁа-яёA-Za-z0-9])([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}))(?![А-ЯЁа-яёA-Za-z0-9])/gmi)[0] : null;
+      letter.usefulInfo = letter.message.match(/([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}\b))/gmi)
+        ? letter.message.match(/([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}\b))/gmi)[0]
+        : null;
     } else if (/оплата/gi.exec(letter.topic)) {
-      letter.usefulInfo = letter.message.match(/([\d\.,\s-]+[\d\.]+)/mi) ? parseFloat(letter.message.match(/([\d\.,\s-]+[\d\.]+)/mi)[0].trim().replace(/,/g, '')) : null;
+      letter.usefulInfo = letter.message.match(/([\d\.,\s-]+[\d\.]+)/mi)
+        ? parseFloat(letter.message.match(/([\d\.,\s-]+[\d\.]+)/mi)[0].trim().replace(/,/g, ''))
+        : null;
     } else {
       letter.usefulInfo = null;
     }
@@ -19,7 +25,6 @@ function getUsefulInfo(letters) {
 
   return letters;
 }
-
 
 
 module.exports = {
