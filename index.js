@@ -1,4 +1,4 @@
-const MEETING = 'Встреча';
+const MEETING = 'встреча';
 const COMPANY = 'компания';
 const CAR = 'автомобиль';
 const PAYMENT = 'оплата';
@@ -24,7 +24,7 @@ function getUsefulInfo(letters) {
 
   for (const letter of letters) {
     let usefulInfo = null;
-    const keyword = topicContainskeyword(letter.topic);
+    const keyword = topicContainskeyword(letter.topic.toLowerCase());
     switch (keyword) {
       case MEETING:
         usefulInfo = getMeetingDates(letter.message);
