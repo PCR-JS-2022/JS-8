@@ -18,7 +18,13 @@ function getUsefulInfo(letters) {
 		}
 		if (topic.includes("оплата")) {
 			const sum = /((\d{1,3},)*(\d{1,3})+(\.)*(\d{2})*) р\./m;
-			return { ...letter, usefulInfo: +(letter.message.match(sum)?.[0].replace(/( р\.)/g, '').replace(/,/g, '')) };
+			const matches = letter.message.match(sum);
+			return {
+				...letter,
+				usefulInfo: matches
+					? +(matches[0].replace(/( р\.)/g, '')).replace(/,/g, '')
+					: null
+			}
 		}
 
 		throw new Error("Invalid letter");
