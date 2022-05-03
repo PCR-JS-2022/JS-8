@@ -5,11 +5,13 @@ const PAYMENT = 'оплата';
 
 const keywords = [MEETING, COMPANY, CAR, PAYMENT];
 const keywordsRegex = {
-  [MEETING]: /[0-3][1-9].[0-1][1-9].[0-9]{4}\s[0-2][0-9]:[0-5][0-9]/g,
-  [COMPANY]: /(ИП|ООО|ООО|ОАО|АО|ЗАО)\s"[ЁёА-я\s]+"/g,
+  [MEETING]: /[0-3][0-9].[0-1][0-9].[0-9]{4}\s[0-2][0-9]:[0-5][0-9]/g,
+  [COMPANY]: /(ИП|ООО|ООО|ОАО|АО|ЗАО)\s"[ЁёА-я\s]+"/,
   [CAR]: /[\s.,][a-zA-ZЁёА-я][0-9]{3}[a-zA-ZЁёА-я]{2}\s[0-9]{2,3}[\s,.]/,
-  [PAYMENT]: /[0-9]{1,3}(?:,?[0-9]{3})*(?:\.?[0-9]{2})/
+  [PAYMENT]: /[\s,]{1}[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?\sр\./
 }
+
+const test = '[\s]{0,1}[0-9]{1,3}(?:,?[0-9]{3})*(?:[,0-9][0-9]{1,3}\.[0-9]{2})\sр\.'
 
 /**
  * Функция находит и добавляет полезную информацию в письма
@@ -17,7 +19,7 @@ const keywordsRegex = {
  */
 function getUsefulInfo(letters) {
   if (!Array.isArray(letters)) {
-    throw new TypeError('letters must be an array');
+    return null;
   }
 
   const newLetters = [];
@@ -30,13 +32,13 @@ function getUsefulInfo(letters) {
         usefulInfo = getMeetingDates(letter.message);
         break;
       case COMPANY:
-        usefulInfo = getAllMatchedSubstrings(letter.message, keywordsRegex[COMPANY]);
+        usefulInfo = getFirstMatchedSubstring(letter.message, keywordsRegex[COMPANY]);
         break;
       case CAR:
         usefulInfo = getCarNumber(letter.message);
         break;
       case PAYMENT:
-        usefulInfo = getFirstMatchedSubstring(letter.message, keywordsRegex[PAYMENT]);
+        usefulInfo = getMoney(letter.message);
         if (usefulInfo) {
           const removeCommas = usefulInfo.replace(/,/g, '');
           usefulInfo = parseFloat(removeCommas);
@@ -97,25 +99,26 @@ function getMeetingDates(message) {
  */
 function getFirstMatchedSubstring(text, regex) {
   const match = text.match(regex);
-  if (!match) {
+  if (!match || match.length === 0) {
     return null;
   }
 
-  return match[0] || null;
+  return match[0];
 }
 
 /**
  * @param {string} text
- * @param {RegExp} regex
- * @return {Array<string> | null}
+ * @return {string | null}
  */
- function getAllMatchedSubstrings(text, regex) {
-  const match = text.match(regex);
+ function getMoney(text) {
+  const match = text.match(keywordsRegex[PAYMENT]);
   if (!match || match.length === 0) {
     return null;
   }
-  
-  return match;
+
+  const fixingRegex = /[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?/;
+
+  return match[0].match(fixingRegex)[0];
 }
 
 /**
@@ -124,14 +127,18 @@ function getFirstMatchedSubstring(text, regex) {
  * @return {string | null}
  */
  function getCarNumber(text) {
-  const match = text.match(keywordsRegex[CAR]);
-  if (!match[0]) {
+  let match = text.match(keywordsRegex[CAR]);
+  if (!match || !match[0]) {
     return null;
   }
 
   const fixingRegex = /[a-zA-ZЁёА-я][0-9]{3}[a-zA-ZЁёА-я]{2}\s[0-9]{2,3}/;
+  const fixed =  match[0].match(fixingRegex);
+  if (!fixed) {
+    return null;
+  }
 
-  return match[0].match(fixingRegex)[0] || null;
+  return fixed[0];
 }
 
 /**
