@@ -97,6 +97,10 @@ function getMeetingDates(message) {
  */
 function getFirstMatchedSubstring(text, regex) {
   const match = text.match(regex);
+  if (!match) {
+    return null;
+  }
+  
   return match[0] || null;
 }
 
