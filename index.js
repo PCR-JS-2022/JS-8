@@ -7,7 +7,7 @@ function getUsefulInfo(letters) {
         let usefulInfo = null
         
         if (letter.topic.match(/встреча/iu)) {
-            let res = letter.message.match(/(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4}\s([01]\d|2[0-3]):([0-5]\d)\b/gmui)
+            let res = letter.message.match(/(0[1-9]|[12]\d|3[01])[.](0[1-9]|1[0-2])[.]\d{4}\s([01]\d|2[0-3]):([0-5]\d)\b/gmui)
             if (res) {
                 res = Array.from(res)
                 if (res.length) {
@@ -31,7 +31,7 @@ function getUsefulInfo(letters) {
         }
         
         if (letter.topic.match(/оплата/iu)) {
-            let res = letter.message.match(/(([1-9]\d{0,2}(,\d{3})*|0|[1-9]\d*)(\.\d{2})?) р\./u)
+            let res = letter.message.match(/(([1-9]\d{0,2}(,\d{3})*|0|[1-9]\d*)([.]\d{2})?) р\./u)
             if (res) {
                 usefulInfo = Number(res[1].replaceAll(',', ''))
             }
