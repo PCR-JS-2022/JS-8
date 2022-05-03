@@ -7,7 +7,7 @@ function getUsefulInfo(letters) {
         let usefulInfo = null
         
         if (letter.topic.match(/встреча/iu)) {
-            let res = letter.message.match(/((0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4} ([01]\d|2[0-3]):([0-5]\d))/gmu)
+            let res = letter.message.match(/((0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4} ([01]\d|2[0-3]):([0-5]\d))/gmui)
             if (res) {
                 res = Array.from(res)
                 if (res.length) {
@@ -17,14 +17,14 @@ function getUsefulInfo(letters) {
         }
 
         if (letter.topic.match(/компания/iu)) {
-            let res = letter.message.match(/(ИП|ООО|ОАО|АО|ЗАО) ".+"/mu) 
+            let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) ".+")/mui)
             if (res) {
                 usefulInfo = res[1]
             }
         }
 
         if (letter.topic.match(/автомобиль/iu)) {
-            let res = letter.message.match(/(([А-ЯЁA-Z]\d{3}(?<!000)[А-ЯЁA-Z]{2}) (\d{2,3}))\b/mu)
+            let res = letter.message.match(/(([А-ЯA-ZЁ]\d{3}(?<!000)[А-ЯA-ZЁ]{2}) (\d{2,3}))\b/mui)
             if (res) {
                 usefulInfo = res[1]
             }
