@@ -13,7 +13,7 @@ function getUsefulInfo(letters) {
         }
 
         if (letter.topic.match(/компания/i)) {
-            let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) ".+")/i) 
+            let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) 1".+")/i) 
             if (res) {
                 usefulInfo = res[1]
             }
