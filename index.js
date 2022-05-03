@@ -35,29 +35,25 @@ function getUsefulInfo(letters) {
   }
 
   letters.forEach(letter => {
+    if (typeof letter.message !== 'string') {
+      letter.message = ''
+    }
+
     if (letter.topic.toLowerCase().indexOf("встреча") != -1) {
       letter.usefulInfo = findMeetingDate(letter.message)
-      console.log(letter.usefulInfo)
     }
 
     if (letter.topic.toLowerCase().indexOf("компания") != -1) {
       letter.usefulInfo = findCompanyName(letter.message)
-      console.log(letter.usefulInfo)
     }
 
     if (letter.topic.toLowerCase().indexOf("автомобиль") != -1) {
       letter.usefulInfo = findCarPlate(letter.message)
-      console.log(letter.usefulInfo)
     }
 
     if (letter.topic.toLowerCase().indexOf("оплата") != -1) {
       letter.usefulInfo = findPrice(letter.message)
-      console.log(letter.usefulInfo)
     }
-    /*
-    if (!letter.usefulInfo) {
-      letter.usefulInfo = null
-    }*/
   });
   return letters
 }
