@@ -17,16 +17,16 @@ function getUsefulInfo(letters) {
         }
 
         if (letter.topic.match(/компания/iu)) {
-            let res = letter.message.match(/((ИП|ООО|ОАО|АО|ЗАО) ".+")/mui)
+            let res = letter.message.match(/(ИП|ООО|ОАО|АО|ЗАО)\s".+"/mui)
             if (res) {
-                usefulInfo = res[1]
+                usefulInfo = res[0]
             }
         }
 
         if (letter.topic.match(/автомобиль/iu)) {
-            let res = letter.message.match(/([А-ЯA-ZЁ]\d{3}(?<!000)[А-ЯA-ZЁ]{2} (\d{2,3}))\b/mui)
+            let res = letter.message.match(/[А-ЯA-ZЁ]\d{3}(?<!000)[А-ЯA-ZЁ]{2}\s\d{2,3}\b/mui)
             if (res) {
-                usefulInfo = res[1]
+                usefulInfo = res[0]
             }
         }
         
