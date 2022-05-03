@@ -11,8 +11,8 @@ function getUsefulInfo(letters) {
         ? letter.message.match(/(?<![А-ЯЁа-яёA-Za-z0-9])(ИП|ООО|ОАО|АО|ЗАО)\s\".+"/mi)[0]
         : null;
     } else if (/автомобиль/gi.exec(letter.topic)) {
-      letter.usefulInfo = letter.message.match(/?<![А-ЯЁа-яёA-Za-z0-9])([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}\b))/gmi)
-        ? letter.message.match(/?<![А-ЯЁа-яёA-Za-z0-9])([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}\b))/gmi)[0]
+      letter.usefulInfo = letter.message.match(/(?<![А-ЯЁа-яёA-Za-z0-9])([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}\b))/gmi)
+        ? letter.message.match(/(?<![А-ЯЁа-яёA-Za-z0-9])([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}\b))/gmi)[0]
         : null;
     } else if (/оплата/gi.exec(letter.topic)) {
       letter.usefulInfo = letter.message.match(/(([1-9]\d{0,2}(,\d{3})*|0|[1-9]\d*)([.]\d{2})?) р\./mi)
