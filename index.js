@@ -7,7 +7,7 @@ function getUsefulInfo(letters) {
         let usefulInfo = null
         
         if (letter.topic.match(/встреча/i)) {
-            let res = letter.message.match(/((0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4} ([01]\d|2[0-3]):([0-5]\d))\b/gm)
+            let res = letter.message.match(/((0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4} ([01]\d|2[0-3]):([0-5]\d))/gm)
             if (res) {
                 res = Array.from(res)
                 usefulInfo = res.map((r) => r)
