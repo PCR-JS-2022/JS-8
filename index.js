@@ -15,8 +15,8 @@ function getUsefulInfo(letters) {
         ? letter.message.match(/(?<![А-ЯЁа-яёA-Za-z0-9])([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2}\s([0-9]{2,3}\b))/gmi)[0]
         : null;
     } else if (/оплата/gi.exec(letter.topic)) {
-      letter.usefulInfo = letter.message.match(/(?!0*[\.,]00)\d{1,3}(,\d{3})*(\.\d\d)? р\.$/mi)
-        ? parseFloat(letter.message.match(/(?!0*[\.,]00)\d{1,3}(,\d{3})*(\.\d\d)? р\.$/mi)[0].trim().replace(/,/g, ''))
+      letter.usefulInfo = letter.message.match(/([1-9]\[0-9]{0,2}(,\[0-9]{3})*|0|[1-9][0-9]*)(\.[0-9]{2})?) р\./mi)
+        ? parseFloat(letter.message.match(/([1-9]\[0-9]{0,2}(,\[0-9]{3})*|0|[1-9][0-9]*)(\.[0-9]{2})?) р\./mi)[0].trim().replace(/,/g, ''))
         : null;
     } else {
       letter.usefulInfo = null;
@@ -25,7 +25,6 @@ function getUsefulInfo(letters) {
 
   return letters;
 }
-
 
 module.exports = {
   getUsefulInfo,
