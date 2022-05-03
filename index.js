@@ -1,28 +1,36 @@
+function checkInfo(result) {
+  if (result) {
+    return result[0]
+  }
+  return null
+}
+
 function findMeetingDate(message) {
-  return message.match(
+   let date = message.match(
     /(0[1-9]|[1-2][0-9]|3[0-1]).(0[1-9]|1[0-2]).([0-9][0-9][0-9][0-9]) ([0-1][0-9]|2[0-3]):([0-5][0-9])/g
   )
+  return date
 }
 
 function findCompanyName(message) {
   let company = message.match(
     /(ИП|ООО|ОАО|АО|ЗАО) ".+"/g
   )
-  return company[0]
+  return checkInfo(company)
 }
 
 function findCarPlate(message) {
   let plate = message.match(
     /[АВЕКМНОРСТУХABEKMHOPCTYX][0-9][0-9][0-9][АВЕКМНОРСТУХABEKMHOPCTYX][АВЕКМНОРСТУХABEKMHOPCTYX]( )[0-9][0-9]([0-9]{0,1})/g
   )
-  return plate[0]
+  return checkInfo(plate)
 }
 
 function findPrice(message) {
   let sum = message.match(
     /(([0-9]{1,3},)*([0-9]{1,3})+.*([0-9][0-9])*) р./g
   )
-  return sum[0].replace(/ р./g, '').replace(/,/g, '')
+  return checkInfo(sum)
 }
 
 /**
@@ -40,6 +48,7 @@ function getUsefulInfo(letters) {
     }
 
     if (letter.topic.toLowerCase().indexOf("встреча") != -1) {
+
       letter.usefulInfo = findMeetingDate(letter.message)
     }
 
@@ -52,7 +61,7 @@ function getUsefulInfo(letters) {
     }
 
     if (letter.topic.toLowerCase().indexOf("оплата") != -1) {
-      letter.usefulInfo = findPrice(letter.message)
+      letter.usefulInfo = findPrice(letter.message).replace(/ р./g, '').replace(/,/g, '')
     }
   });
   return letters
