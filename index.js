@@ -3,6 +3,9 @@
  * @param {Array<{topic:string, message:string}>} letters 
  */
 function getUsefulInfo(letters) {
+  if(!Array.isArray(letters) || !letters) {
+    throw new Error("Некорректные данные");
+  }
   letters.forEach(letter => {
     if(letter.topic.match(/встреча/ig)) {
       letter.usefulInfo = letter.message.match(/(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.\d{4} ([01]\d|2[0-3]):([0-5]\d)/g);
