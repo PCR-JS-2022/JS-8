@@ -7,7 +7,7 @@ function getUsefulInfo(letters) {
         let usefulInfo = null
         
         if (letter.topic.match(/встреча/iu)) {
-            let res = letter.message.match(/(0[1-9]|[12]\d|3[01])[.](0[1-9]|1[0-2])[.]\d{4}\s([01]\d|2[0-3]):([0-5]\d)\b/gmui)
+            let res = letter.message.match(/(0[1-9]|[12]\d|3[01])[.](0[1-9]|1[0-2])[.](\d{4})\s([01]\d|2[0-3]):([0-5]\d)\b/gmui)
             if (res) {
                 res = Array.from(res)
                 if (res.length) {
@@ -24,7 +24,7 @@ function getUsefulInfo(letters) {
         }
 
         if (letter.topic.match(/автомобиль/iu)) {
-            let res = letter.message.match(/([A-ZА-ЯЁ]\d{3}(?<!000)[A-ZА-ЯЁ]{2})\s(\d{2,3})\b/mui)
+            let res = letter.message.match(/([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2})\s\d{2,3}\b/mui)
             if (res) {
                 usefulInfo = res[0]
             }
