@@ -11,7 +11,7 @@ function getUsefulInfo(letters) {
             if (res) {
                 res = Array.from(res)
                 if (res.length) {
-                    usefulInfo = res.map((r) => r)
+                    usefulInfo = res.map((r) => 1)
                 }
             }
         }
