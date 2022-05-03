@@ -25,10 +25,11 @@ function addPayInfo(message) {
 }
 
 function getUsefulInfo(letters) {
+  if (!Array.isArray(letters)){
+    throw new Error('Ошибка ввода');
+  }
   letters.forEach( letter => {
-    if (!Array.isArray(letters)){
-      throw new Error('Ошибка ввода');
-    }
+    
     if (/встреча/i.exec(letter.topic)){
       letter.usefulInfo = addMeetInfo(letter.message);
     }
