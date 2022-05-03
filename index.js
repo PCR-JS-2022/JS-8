@@ -6,8 +6,8 @@ const PAYMENT = 'оплата';
 const keywords = [MEETING, COMPANY, CAR, PAYMENT];
 const keywordsRegex = {
   [MEETING]: /[0-3][0-9].[0-1][0-9].[0-9]{4}\s[0-2][0-9]:[0-5][0-9]/g,
-  [COMPANY]: /(ИП|ООО|ООО|ОАО|АО|ЗАО)\s"[ЁёА-я\s]+"/,
-  [CAR]: /[\s.,][a-zA-ZЁёА-я][0-9]{3}[a-zA-ZЁёА-я]{2}\s[0-9]{2,3}[\s,.]/,
+  [COMPANY]: /(ИП|ООО|ООО|ОАО|АО|ЗАО)\s".+"/,
+  [CAR]: /[АВЕКМНОРСТУХA-Z][0-9]{3}[АВЕКМНОРСТУХA-Z]{2}\s[0-9]{2,3}\b/,
   [PAYMENT]: /[\s,]{1}[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{2})?\sр\./
 }
 
@@ -132,13 +132,7 @@ function getFirstMatchedSubstring(text, regex) {
     return null;
   }
 
-  const fixingRegex = /[a-zA-ZЁёА-я][0-9]{3}[a-zA-ZЁёА-я]{2}\s[0-9]{2,3}/;
-  const fixed =  match[0].match(fixingRegex);
-  if (!fixed) {
-    return null;
-  }
-
-  return fixed[0];
+  return match[0];
 }
 
 /**
