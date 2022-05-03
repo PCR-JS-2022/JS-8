@@ -20,7 +20,7 @@ function getUsefulInfo(letters) {
         }
 
         if (letter.topic.match(/автомобиль/i)) {
-            let res = letter.message.match(/([а-яёa-z]\d{3}(?<!000)[а-яёa-z]{2} \d{2,3})\b/i)
+            let res = letter.message.match(/([А-ЯЁA-Z]\d{3}(?<!000)[А-ЯЁA-Z]{2} \d{2,3})\b/)
             if (res) {
                 usefulInfo = res[1]
             }
