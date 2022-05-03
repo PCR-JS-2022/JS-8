@@ -7,7 +7,8 @@ function getUsefulInfo(letters) {
         const lower = letter.topic.toLowerCase()
 
         if (lower.includes('встреча')) {
-            const re = /(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\d (0[1-9]|[1][0-9]|2[0-4])[:]([0-5][0-9])/gm;
+            const re = /(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\d (0[0-9]|[1][0-9]|2[0-3])[:]([0-5][0-9])/gm;
+            console.log(letter.message.match(re))
             return { ...letter, usefulInfo: letter.message.match(re) };
         }
 
