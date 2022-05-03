@@ -18,7 +18,7 @@ function getUsefulInfo(letters) {
             usefulInfo = letter.message.match(auto) ? letter.message.match(auto)[0] : null;
         }
         if(letter.topic.match(/оплата/i)) {
-            let payment = /(\d{1,3})(,\d{1,3})*(.\d{2})* р./g;
+            let payment = /(\d{1,3})(,\d{1,3})*(.\d{2})* р\./g;
             usefulInfo = letter.message.match(payment)
                 ? Number(letter.message.match(payment)[0].slice(0, -3).replaceAll(',', ''))
                 : null
