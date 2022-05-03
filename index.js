@@ -44,7 +44,7 @@ function getUsefulInfo(letters) {
     }
 
     if(regPay.test(letter.topic)) {
-      const regPrice = /[1-9]\d{0,}(((,\d{3})+)|(\d+))(([.]\d{2} p[.])|( р[.]))/;
+      const regPrice = /(([1-9]\d{0,2}(,\d{3})+|[1-9]\d*|0)([.]\d{2})?) р[.]/;
       if(regPrice.exec(letter.message) !== null) {
         let price = regPrice.exec(letter.message)[0];
         price = price.substring(0, price.length - 3);
