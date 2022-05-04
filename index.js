@@ -3,6 +3,9 @@
  * @param {Array<{topic:string, message:string}>} letters 
  */
 function getUsefulInfo(letters) {
+  if (!Array.isArray(letters)) {
+    throw new Error('letters не является массивом');
+  }
   let lettersCopy = letters.slice();
   const regExps = {
     date: /(0[1-9]|1[0-9]|2[0-9]|3[0-1])[.](0[1-9]|1[0-2])[.]\d{4} (0[0-9]|1[0-9]|2[0-3]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])/g,
@@ -44,6 +47,8 @@ function getUsefulInfo(letters) {
   });
   return lettersCopy
 }
+
+
 
 module.exports = {
   getUsefulInfo,
