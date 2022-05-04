@@ -14,7 +14,7 @@ function getUsefulInfo(letters) {
     money: /(((?<!(\d|[,]))(\d{1,3}[,])(\d{3}[,]){1,}\d{3}([.]\d{2})?|(?<!([.]|\d))\d{1,}([.]\d{2})?) р[.])/g
   }
   lettersCopy.forEach((elem) => {
-    if (elem.topic.match(/(В|в)стреча/)) {
+    if (elem.topic.match(/встреча/ig)) {
       if (elem.message.match(regExps["date"]) !== null) {
         elem.usefulInfo = elem.message.match(regExps["date"])
       }
@@ -22,19 +22,19 @@ function getUsefulInfo(letters) {
         elem.usefulInfo = null
       }
     }
-    else if (elem.topic.match(/(К|к)омпания/)) {
+    else if (elem.topic.match(/компания/ig)) {
       if (elem.message.match(regExps["company"]) !== null) {
         elem.usefulInfo = elem.message.match(regExps["company"])[0]
       }
       else elem.usefulInfo = null
     }
-    else if (elem.topic.match(/(А|а)втомобиль/)) {
+    else if (elem.topic.match(/автомобиль/ig)) {
       if (elem.message.match(regExps["autoNumber"]) !== null) {
         elem.usefulInfo = elem.message.match(regExps["autoNumber"])[0]
       }
       else elem.usefulInfo = null
     }
-    else if (elem.topic.match(/(О|о)плата/)) {
+    else if (elem.topic.match(/оплата/ig)) {
       if (elem.message.match(regExps["money"]) !== null) {
         elem.usefulInfo = Number(elem.message.match(regExps["money"])[0]
             .replaceAll(",","").replaceAll("р.","").replaceAll(" ",""))
@@ -45,8 +45,6 @@ function getUsefulInfo(letters) {
   });
   return lettersCopy
 }
-
-
 
 module.exports = {
   getUsefulInfo,
