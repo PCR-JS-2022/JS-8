@@ -36,8 +36,8 @@ function getUsefulInfo(letters) {
 
     if (elem.topic.match(/оплата/)) {
       if (elem.message.match(regExps["money"]) != null) {
-        elem.usefulInfo = elem.message.match(regExps["money"])[0]
-            .replaceAll(",","").replaceAll("р.","").replaceAll(" ","")
+        elem.usefulInfo = Number(elem.message.match(regExps["money"])[0]
+            .replaceAll(",","").replaceAll("р.","").replaceAll(" ",""))
       }
       else elem.usefulInfo = null
     }
