@@ -14,7 +14,7 @@ function getUsefulInfo(letters) {
     money: /(((?<!(\d|[,]))(\d{1,3}[,])(\d{3}[,]){1,}\d{3}([.]\d{2})?|(?<!([.]|\d))\d{1,}([.]\d{2})?) р[.])/g
   }
   lettersCopy.forEach((elem) => {
-    if (elem.topic.match(/(В|в)стреча/)) {
+    if (elem.topic.match(/встреча/)) {
       if (elem.message.match(regExps["date"]) !== null) {
         elem.usefulInfo = elem.message.match(regExps["date"])
       }
