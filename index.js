@@ -7,9 +7,8 @@ function getUsefulInfo(letters) {
 
   return letters.map(letter => {
     let usefulInfo = null
-    const toLow = letter.topic.toLowerCase()
 
-    if (toLow.includes('встреча')) {
+    if (letter.topic.match(/встреча/iu)) {
       let date = letter.message.match(/(0[1-9]|[12]\d|3[01])[.](0[1-9]|1[0-2])[.](\d{4})\s([01]\d|2[0-3]):([0-5]\d)\b/gmui)
       if (date) {
         date = Array.from(date)
@@ -17,17 +16,17 @@ function getUsefulInfo(letters) {
       }
     }
    
-    if (toLow.includes('компания')) {
+    if (letter.topic.match(/компания/iu)) {
       let company = letter.message.match(/(ИП|ООО|ОАО|АО|ЗАО)\s["].+["]/mui)
       if (company) usefulInfo = company[0]
     }
 
-    if (toLow.includes('автомобиль')) {
+    if (letter.topic.match(/автомобиль/iu)) {
       let number = letter.message.match(/([АВЕКМНОРСТУХA-Z]\d{3}(?<!000)[АВЕКМНОРСТУХA-Z]{2})\s\d{2,3}\b/mui)
       if (number) usefulInfo = number[0]
     }
 
-    if (toLow.includes('оплата')) {
+    if (letter.topic.match(/оплата/iu)){
       let sum = letter.message.match(/(([1-9]\d{0,2}(,\d{3})*|0|[1-9]\d*)([.]\d{2})?) р\./u)
       if (sum) usefulInfo = Number(sum[1].replaceAll(',', ''))
 
