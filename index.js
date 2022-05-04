@@ -15,7 +15,7 @@ function getUsefulInfo(letters) {
   }
   lettersCopy.forEach((elem) => {
     if (elem.topic.match(/(В|в)стреча/)) {
-      if (elem.message.match(regExps["date"]) != null) {
+      if (elem.message.match(regExps["date"]) !== null) {
         elem.usefulInfo = elem.message.match(regExps["date"])
       }
       else {
@@ -23,19 +23,19 @@ function getUsefulInfo(letters) {
       }
     }
     else if (elem.topic.match(/компания/)) {
-      if (elem.message.match(regExps["company"]) != null) {
+      if (elem.message.match(regExps["company"]) !== null) {
         elem.usefulInfo = elem.message.match(regExps["company"])[0]
       }
       else elem.usefulInfo = null
     }
     else if (elem.topic.match(/автомобиль/)) {
-      if (elem.message.match(regExps["autoNumber"]) != null) {
+      if (elem.message.match(regExps["autoNumber"]) !== null) {
         elem.usefulInfo = elem.message.match(regExps["autoNumber"])[0]
       }
       else elem.usefulInfo = null
     }
     else if (elem.topic.match(/оплата/)) {
-      if (elem.message.match(regExps["money"]) != null) {
+      if (elem.message.match(regExps["money"]) !== null) {
         elem.usefulInfo = Number(elem.message.match(regExps["money"])[0]
             .replaceAll(",","").replaceAll("р.","").replaceAll(" ",""))
       }
