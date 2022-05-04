@@ -16,6 +16,10 @@ function getUsefulInfo(letters) {
       let carMatch = letter.message.match(/[A-ZАВЕКМНОРСТУХ]\d{3}[A-ZАВЕКМНОРСТУХ]{2} \d{2,3}/g);
       letter.usefulInfo = carMatch ? carMatch[0] : carMatch;
     }
+    if (topicLower.includes('оплата')) {
+      let priceMatch = letter.message.match(/(\d{1,3},)*(\d{3})(\.\d{2})? [рp]\./);
+      letter.usefulInfo = priceMatch ? parseFloat(priceMatch[0].split()[0].replaceAll(",", "")) : priceMatch;
+    }
   });
 
   return letters;
