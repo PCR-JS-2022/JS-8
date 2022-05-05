@@ -3,6 +3,14 @@
  * @param {Array<{topic:string, message:string}>} letters 
  */
 
+ let letter = [{
+  topic: 'Требуется оплата по поручению №1337',
+  message: `
+    Идейные соображения высшего порядка, а также рамки и место обучения кадров представляет собой интересный эксперимент проверки соответствующий условий активизации. Сумма к оплате 1,000,000.35 р.
+    Значимость этих проблем настолько очевидна, что сложившаяся структура организации играет важную роль в формировании новых предложений.
+  `
+}];
+
 function toNuM(str) {
   return parseFloat(str.replace(/ р./, '').replace(/,/g, ''));
 }
@@ -25,7 +33,7 @@ function getUsefulInfo(letters) {
         letter.usefulInfo = num[0];
       }
     } else if (/оплата/i.test(letter.topic)) {
-      const sum = letter.message.match(/(\d{1,3})(,\d{3})*(.\d{1,2})* (р.)/gm);
+      const sum = letter.message.match(/(\d{1,3})([,]\d{1,3})?([.]\d{1,2})? (р[.])/gm);
       if (sum !== null) {
         letter.usefulInfo = toNuM(sum[0]);
       }
@@ -36,6 +44,8 @@ function getUsefulInfo(letters) {
   });
   return letters;
 }
+
+getUsefulInfo(letter);
 
 module.exports = {
   getUsefulInfo,
