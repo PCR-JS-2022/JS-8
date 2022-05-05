@@ -15,7 +15,7 @@ function getUsefulInfo(letters) {
     if (/встреча/i.test(letter.topic)) {
       letter.usefulInfo = letter.message.match(/(0[1-9]|[1-2]\d|3[01]).(0\d|1[0-2]).(\d{4}) ([01]\d|2[0-3]):([0-5]\d)/gm);
     } else if (/компания/i.test(letter.topic)) {
-      const company = letter.message.match(/(ИП|ООО|ОАО|АО|ЗАО) (".+?")/gm);
+      const company = letter.message.match(/(ИП|ООО|ОАО|АО|ЗАО) (".+")/gm);
       if (company !== null) {
         letter.usefulInfo = company[0];
       }
@@ -25,7 +25,7 @@ function getUsefulInfo(letters) {
         letter.usefulInfo = num[0];
       }
     } else if (/оплата/i.test(letter.topic)) {
-      const sum = letter.message.match(/(\d{1,3})(,\d{3})*(.[0-9]{1,2})? (р.)/gm);
+      const sum = letter.message.match(/(\d{1,3})(,\d{3})*(.\d{1,2})* (р.)/gm);
       if (sum !== null) {
         letter.usefulInfo = toNuM(sum[0]);
       }
