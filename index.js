@@ -3,7 +3,7 @@
  * @param {Array<{topic:string, message:string}>} letters 
  */
 
- function toNuM(str) {
+function toNuM(str) {
   return parseFloat(str.replace(/ р./, '').replace(/,/g, ''));
 }
 
@@ -13,7 +13,7 @@ function getUsefulInfo(letters) {
   }
   letters.forEach(letter => {
     if (/встреча/i.test(letter.topic)) {
-      letter.usefulInfo = letter.message.match(/([0-2]\d|3[01]).(0\d|1[0-2]).(\d{4}) ([01]\d|2[0-3]):([0-5]\d)/gm);
+      letter.usefulInfo = letter.message.match(/(0[1-9]|[1-2]\d|3[01]).(0\d|1[0-2]).(\d{4}) ([01]\d|2[0-3]):([0-5]\d)/gm);
     } else if (/компания/i.test(letter.topic)) {
       const company = letter.message.match(/(ИП|ООО|ОАО|АО|ЗАО) (".+?")/gm);
       if (company !== null) {
