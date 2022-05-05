@@ -3,7 +3,7 @@
  * @param {Array<{topic:string, message:string}>} letters 
  */
 
-function toNuM(str) {
+ function toNuM(str) {
   return parseFloat(str.replace(/ р./, '').replace(/,/g, ''));
 }
 
