@@ -3,6 +3,10 @@
  * @param {Array<{topic:string, message:string}>} letters
  */
 function getUsefulInfo(letters) {
+    if (!letters || !Array.isArray(letters)) {
+        throw new Error("Некорректные данные");
+    }
+
     const meetingRegExp = /встреча/gi;
     const companyRegExp = /компания/gi;
     const carRegExp = /автомобиль/gi;
@@ -10,7 +14,9 @@ function getUsefulInfo(letters) {
     const dateRegExp =
         /(0[1-9]|[12]\d|3[0-1])[.](0[1-9]|1[0-2])[.]\d{4} ([0-1]\d|2[0-3]):[0-5]\d/g;
     const companyNameRegExp = /(ИП|ООО|ОАО|АО|ЗАО) ".+?"/g;
-    const carPlateRegExp = /[УКЕНХВАРОСМТYKEHXBAPOCMT]\d{3}[УКЕНХВАРОСМТYKEHXBAPOCMT]{2} \d{2,3}/g;
+    const carPlateRegExp =
+        /[УКЕНХВАРОСМТYKEHXBAPOCMT]\d{3}[УКЕНХВАРОСМТYKEHXBAPOCMT]{2} \d{2,3}/g;
+
     letters.forEach((letter) => {
         const usefulInfo = [];
         let result;
