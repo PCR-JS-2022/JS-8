@@ -15,7 +15,7 @@ function getUsefulInfo(letters) {
         /(0[1-9]|[12]\d|3[0-1])[.](0[1-9]|1[0-2])[.]\d{4} ([0-1]\d|2[0-3]):[0-5]\d/g;
     const companyNameRegExp = /(ИП|ООО|ОАО|АО|ЗАО) ".+?"/g;
     const carPlateRegExp =
-        /[УКЕНХВАРОСМТYKEHXBAPOCMT]\d{3}[УКЕНХВАРОСМТYKEHXBAPOCMT]{2} \d{2,3}/g;
+        /[УКЕНХВАРОСМТYKEHXBAPOCMT]\d{3}[УКЕНХВАРОСМТYKEHXBAPOCMT]{2} \d{2,3}/gi;
 
     letters.forEach((letter) => {
         let usefulInfo;
