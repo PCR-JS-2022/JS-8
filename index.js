@@ -18,25 +18,26 @@ function getUsefulInfo(letters) {
         /[УКЕНХВАРОСМТYKEHXBAPOCMT]\d{3}[УКЕНХВАРОСМТYKEHXBAPOCMT]{2} \d{2,3}/g;
 
     letters.forEach((letter) => {
-        const usefulInfo = [];
-        let result;
+        let usefulInfo;
+
         if (meetingRegExp.test(letter.topic)) {
+            let result;
+            const datesArray = [];
+
             while ((result = dateRegExp.exec(letter.message)) !== null) {
-                usefulInfo.push(result[0]);
+                datesArray.push(result[0]);
             }
+
+            usefulInfo = datesArray;
         } else if (companyRegExp.test(letter.topic)) {
-            while ((result = companyNameRegExp.exec(letter.message)) !== null) {
-                usefulInfo.push(result[0]);
-            }
+            const result = companyNameRegExp.exec(letter.message);
+            usefulInfo = result ? result[0] : null;
         } else if (carRegExp.test(letter.topic)) {
-            while ((result = carPlateRegExp.exec(letter.message)) !== null) {
-                usefulInfo.push(result[0]);
-            }
+            const result = carPlateRegExp.exec(letter.message);
+            usefulInfo = result ? result[0] : null;
         }
 
-        if (usefulInfo.length === 0) letter.usefulInfo = null;
-        else if (usefulInfo.length === 1) letter.usefulInfo = usefulInfo[0];
-        else letter.usefulInfo = usefulInfo;
+        letter.usefulInfo = usefulInfo;
     });
 
     return letters;
