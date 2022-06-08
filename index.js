@@ -8,7 +8,7 @@ function getUsefulInfo(letters) {
     const carRegExp = /автомобиль/gi;
 
     const dateRegExp =
-        /([0-2]\d|3[0-1])[.](0\d|1[0-2])[.]\d{4} ([0-1]\d|2[0-3]):[0-5]\d/g;
+        /(0[1-9]|[12]\d|3[0-1])[.](0[1-9]|1[0-2])[.]\d{4} ([0-1]\d|2[0-3]):[0-5]\d/g;
     const companyNameRegExp = /(ИП|ООО|ОАО|АО|ЗАО) ".+?"/g;
     const carPlateRegExp = /[УКЕНХВАРОСМТ]\d{3}[УКЕНХВАРОСМТ]{2} \d{2,3}/g;
 
