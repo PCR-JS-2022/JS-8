@@ -6,10 +6,10 @@
   return letters.map((letter) => {
     let usefulInfo = null;
     const dateFormat =
-      /(0[1-9]|[1-2]\d|3[0-1]).(0[1-9]|1[012]).\d{4} ([01]\d|2[0-3]):[0-5]\d/g;
+      /(0[1-9]|[1-2]\d|3[0-1])\.(0[1-9]|1[012])\.\d{4} ([01]\d|2[0-3]):[0-5]\d/g;
     const companyFormat = /(ИП|ООО|ОАО|АО|ЗАО) ".+"/g;
     const autoFormat = /[A-ZАВЕКМНОРСТУХ]\d{3}[A-ZАВЕКМНОРСТУХ]{2} \d{2,3}/g;
-    const payFormat = /(\d{1,3})(,\d{1,3})(.\d{2})* р./g;
+    const payFormat = /(\d{1,3})(,\d{1,3})*(.\d{2})* р\./g;
 
     if (letter.topic.match(/встреча/iu)) {
       usefulInfo = letter.message.match(dateFormat)
